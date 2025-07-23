@@ -1,0 +1,74 @@
+/* Settings Page Styles */
+.settings-content {
+    padding: 20px;
+}
+
+.nav-tabs .nav-link {
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-bottom: none;
+    background-color: var(--card-bg);
+}
+
+.nav-tabs .nav-link.active {
+    background-color: var(--bg-color);
+    border-color: var(--border-color);
+    border-bottom-color: var(--bg-color);
+    color: var(--primary-color);
+}
+
+.tab-content {
+    background-color: var(--bg-color);
+    border-color: var(--border-color) !important;
+}
+
+/* Form Styles */
+.form-label {
+    font-weight: 500;
+}
+
+/* Backup Cards */
+.backup-card {
+    margin-bottom: 20px;
+    border: 1px solid var(--border-color);
+}
+
+/* Table Styles */
+.table {
+    color: var(--text-color);
+    background-color: var(--card-bg);
+}
+
+.table th {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* User Badges */
+.badge-admin {
+    background-color: #dc3545;
+}
+
+.badge-manager {
+    background-color: #0d6efd;
+}
+
+.badge-sales {
+    background-color: #198754;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .settings-content {
+        padding: 10px;
+    }
+    
+    .nav-tabs .nav-link {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+}

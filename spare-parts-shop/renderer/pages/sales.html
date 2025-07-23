@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alfath Spare Parts - POS/Sales</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="/renderer/css/style.css" rel="stylesheet">
+    <link href="/renderer/css/pos.css" rel="stylesheet">
+</head>
+<body class="pos-mode">
+    <div class="app-container">
+        <!-- Sidebar (same as dashboard) -->
+        <nav class="sidebar">
+            <!-- Sidebar content from dashboard -->
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <div class="top-bar">
+                <div class="toggle-sidebar">
+                    <i class="bi bi-list"></i>
+                </div>
+                <div class="page-title">
+                    <h3>Point of Sale</h3>
+                </div>
+                <div class="top-bar-actions">
+                    <button class="btn btn-sm btn-outline-secondary me-2" id="open-invoices-btn">
+                        <i class="bi bi-receipt"></i> Invoices
+                    </button>
+                    <button class="btn btn-sm btn-primary" id="new-sale-btn">
+                        <i class="bi bi-plus-circle"></i> New Sale
+                    </button>
+                </div>
+            </div>
+
+            <!-- POS Content -->
+            <div class="pos-content">
+                <!-- Left Panel - Product Selection -->
+                <div class="pos-left-panel">
+                    <!-- Product Search -->
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="product-search" 
+                                       placeholder="Scan barcode or search by name/code" autofocus>
+                                <button class="btn btn-outline-secondary" type="button" id="scan-barcode-btn">
+                                    <i class="bi bi-upc-scan"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Categories -->
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="category-tabs">
+                                <button class="btn btn-sm btn-outline-primary active" data-category="all">All</button>
+                                <!-- Filled by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Grid -->
+                    <div class="card product-grid-card">
+                        <div class="card-body">
+                            <div class="row" id="product-grid">
+                                <!-- Filled by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Panel - Cart and Checkout -->
+                <div class="pos-right-panel">
+                    <!-- Current Sale -->
+                    <div class="card sale-card">
+                        <div class="card-header">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">Current Sale</h5>
+                                <div class="sale-info">
+                                    <span class="badge bg-secondary" id="sale-id">New Sale</span>
+                                    <span class="badge bg-info" id="sale-date"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table" id="sale-items-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Item</th>
+                                            <th>Price</th>
+                                            <th>Qty</th>
+                                            <th>Total</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Filled by JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="sale-totals">
+                                <div class="d-flex justify-content-between">
+                                    <span>Subtotal:</span>
+                                    <span id="subtotal">0.00</span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>Discount:</span>
+                                    <div class="input-group input-group-sm discount-input">
+                                        <input type="number" class="form-control" id="discount" value="0" min="0">
+                                        <select class="form-select" id="discount-type">
+                                            <option value="amount">PKR</option>
+                                            <option value="percent">%</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>Tax:</span>
+                                    <span id="tax">0.00</span>
+                                </div>
+                                <hr>
+                                <div class="d-flex justify-content-between total-row">
+                                    <span><strong>Total:</strong></span>
+                                    <span id="total"><strong>0.00</strong></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Customer Info -->
+                    <div class="card customer-card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Customer</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <select class="form-select" id="customer-select">
+                                    <option value="">Walk-in Customer</option>
+                                    <!-- Filled by JavaScript -->
+                                </select>
+                            </div>
+                            <div class="customer-details" id="customer-details" style="display: none;">
+                                <div class="row mb-2">
+                                    <div class="col-6"><small>Phone:</small></div>
+                                    <div class="col-6 text-end" id="customer-phone"></div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-6"><small>Vehicle:</small></div>
+                                    <div class="col-6 text-end" id="customer-vehicle"></div>
+                                </div>
+                                <button class="btn btn-sm btn-outline-secondary w-100" id="edit-customer-btn">
+                                    <i class="bi bi-pencil"></i> Edit
+                                </button>
+                            </div>
+                            <button class="btn btn-sm btn-outline-primary w-100 mt-2" id="new-customer-btn">
+                                <i class="bi bi-plus-circle"></i> New Customer
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Payment -->
+                    <div class="card payment-card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Payment</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label class="form-label">Payment Method</label>
+                                <select class="form-select" id="payment-method">
+                                    <option value="cash">Cash</option>
+                                    <option value="card">Credit/Debit Card</option>
+                                    <option value="upi">UPI/Online</option>
+                                    <option value="credit">Credit</option>
+                                </select>
+                            </div>
+                            <div class="mb-3" id="amount-tendered-group">
+                                <label class="form-label">Amount Tendered</label>
+                                <input type="number" class="form-control" id="amount-tendered" min="0" step="0.01" value="0">
+                            </div>
+                            <div class="mb-3" id="balance-group" style="display: none;">
+                                <label class="form-label">Balance</label>
+                                <input type="number" class="form-control" id="balance" readonly>
+                            </div>
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-success" id="complete-sale-btn">
+                                    <i class="bi bi-check-circle"></i> Complete Sale
+                                </button>
+                                <button class="btn btn-outline-danger" id="cancel-sale-btn">
+                                    <i class="bi bi-x-circle"></i> Cancel Sale
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Customer Modal -->
+    <div class="modal fade" id="customerModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="customer-modal-title">New Customer</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="customer-form">
+                        <input type="hidden" id="customer-id">
+                        <div class="mb-3">
+                            <label for="customer-name" class="form-label">Name*</label>
+                            <input type="text" class="form-control" id="customer-name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="customer-phone-input" class="form-label">Phone</label>
+                            <input type="text" class="form-control" id="customer-phone-input">
+                        </div>
+                        <div class="mb-3">
+                            <label for="customer-email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="customer-email">
+                        </div>
+                        <div class="mb-3">
+                            <label for="customer-address" class="form-label">Address</label>
+                            <textarea class="form-control" id="customer-address" rows="2"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="customer-vehicle-input" class="form-label">Vehicle Info</label>
+                            <input type="text" class="form-control" id="customer-vehicle-input" 
+                                   placeholder="e.g., Toyota Corolla 2018, ABC-1234">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="save-customer-btn">Save Customer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Invoice Modal -->
+    <div class="modal fade" id="invoiceModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Invoice #<span id="invoice-number"></span></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="invoice-container" id="invoice-container">
+                        <!-- Filled by JavaScript -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="print-invoice-btn">
+                        <i class="bi bi-printer"></i> Print Invoice
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Invoices List Modal -->
+    <div class="modal fade" id="invoicesModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Sales Invoices</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-3">
+                        <div class="col-md-3">
+                            <input type="date" class="form-control" id="invoice-date-from">
+                        </div>
+                        <div class="col-md-3">
+                            <input type="date" class="form-control" id="invoice-date-to">
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" id="invoice-search" placeholder="Search by invoice # or customer">
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-primary w-100" id="search-invoices-btn">Search</button>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover" id="invoices-table">
+                            <thead>
+                                <tr>
+                                    <th>Invoice #</th>
+                                    <th>Date</th>
+                                    <th>Customer</th>
+                                    <th>Items</th>
+                                    <th>Total</th>
+                                    <th>Payment</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Filled by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <nav aria-label="Invoices pagination">
+                        <ul class="pagination justify-content-center mt-3" id="invoices-pagination">
+                            <!-- Filled by JavaScript -->
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Barcode Scanner Modal -->
+    <div class="modal fade" id="barcodeModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Scan Barcode/QR Code</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <div id="scanner-container" style="width: 100%; height: 300px; background: #eee;"></div>
+                    <p class="mt-3">Or enter barcode manually:</p>
+                    <input type="text" class="form-control" id="manual-barcode" placeholder="Enter barcode">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="use-barcode-btn">Use Barcode</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/renderer/js/renderer.js"></script>
+    <script src="/renderer/js/sales.js"></script>
+</body>
+</html>

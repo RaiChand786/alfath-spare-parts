@@ -1,0 +1,47 @@
+/* Reports Specific Styles */
+.reports-content {
+    padding: 15px;
+}
+
+.chart-container {
+    position: relative;
+    height: 400px;
+    width: 100%;
+}
+
+.summary-card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s;
+    height: 100%;
+}
+
+.summary-card:hover {
+    transform: translateY(-5px);
+}
+
+.summary-icon {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.summary-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.summary-label {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+/* Dark mode adjustments */
+body.dark-mode .summary-card {
+    background-color: #2d2d2d;
+    color: #f0f0f0;
+}
+
+body.dark-mode .summary-label {
+    color: #adb5bd;
+}

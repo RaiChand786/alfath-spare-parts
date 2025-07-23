@@ -1,0 +1,16 @@
+:root {
+    --bg-color: #1a1a1a;
+    --text-color: #f0f0f0;
+    --card-bg: #2d2d2d;
+    --border-color: #444;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+.card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+}

@@ -1,0 +1,51 @@
+{
+  "name": "alfath-spare-parts-shop",
+  "version": "1.0.0",
+  "description": "Desktop application for managing Alfath Spare Parts Shop with POS functionality",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "keywords": [
+    "spare parts",
+    "POS",
+    "inventory",
+    "electron",
+    "automotive"
+  ],
+  "author": "Alfath Spare Parts",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-builder": "^24.6.0"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.2",
+    "chart.js": "^4.4.0",
+    "electron-log": "^5.0.0",
+    "electron-store": "^8.1.0",
+    "exceljs": "^4.4.0",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.5.28",
+    "nedb": "^1.8.0",
+    "node-notifier": "^10.0.1",
+    "pdfkit": "^0.13.0",
+    "sqlite3": "^5.1.6",
+    "uuid": "^9.0.0"
+  },
+  "build": {
+    "appId": "com.alfath.spareparts",
+    "productName": "Alfath Spare Parts Shop",
+    "win": {
+      "target": "nsis",
+      "icon": "assets/logo.ico"
+    },
+    "nsis": {
+      "installerIcon": "assets/logo.ico",
+      "uninstallerIcon": "assets/logo.ico"
+    }
+  }
+}

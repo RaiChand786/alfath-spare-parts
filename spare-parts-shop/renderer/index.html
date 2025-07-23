@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alfath Spare Parts - Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="./css/style.css" rel="stylesheet">
+</head>
+<body class="dashboard">
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <img src="../assets/logo.png" alt="Alfath Spare Parts company logo featuring bold text Alfath Spare Parts with a gear icon, set against a clean background, conveying a professional and trustworthy business environment">
+                <h2>Alfath Spare Parts</h2>
+            </div>
+            <ul class="nav flex-column">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#" data-page="dashboard">
+                        <i class="bi bi-speedometer2"></i> Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-page="inventory">
+                        <i class="bi bi-box-seam"></i> Inventory
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-page="sales">
+                        <i class="bi bi-cash-stack"></i> POS/Sales
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-page="purchase">
+                        <i class="bi bi-cart-plus"></i> Purchases
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-page="customers">
+                        <i class="bi bi-people"></i> Customers
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-page="suppliers">
+                        <i class="bi bi-truck"></i> Suppliers
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-page="reports">
+                        <i class="bi bi-graph-up"></i> Reports
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-page="settings">
+                        <i class="bi bi-gear"></i> Settings
+                    </a>
+                </li>
+            </ul>
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <img src="../assets/icons/user.png" alt="User" class="user-avatar">
+                    <span class="username">Admin User</span>
+                </div>
+                <button class="btn btn-sm btn-outline-light logout-btn">
+                    <i class="bi bi-box-arrow-right"></i> Logout
+                </button>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <div class="top-bar">
+                <div class="toggle-sidebar">
+                    <i class="bi bi-list"></i>
+                </div>
+                <div class="page-title">
+                    <h3>Dashboard</h3>
+                </div>
+                <div class="top-bar-actions">
+                    <div class="notification-bell">
+                        <i class="bi bi-bell"></i>
+                        <span class="badge bg-danger notification-count">3</span>
+                    </div>
+                    <div class="quick-actions">
+                        <button class="btn btn-sm btn-primary new-sale-btn" title="New Sale (F1)">
+                            <i class="bi bi-plus-circle"></i> New Sale
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard Content -->
+            <div class="dashboard-content">
+                <!-- Stats Cards -->
+                <div class="row stats-row">
+                    <div class="col-md-3">
+                        <div class="card stat-card">
+                            <div class="card-body">
+                                <div class="stat-icon bg-primary">
+                                    <i class="bi bi-box-seam"></i>
+                                </div>
+                                <h5 class="card-title">Total Items</h5>
+                                <h2 class="stat-value" id="total-items">0</h2>
+                                <p class="stat-change"><span class="text-success">+2.5%</span> from last month</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card stat-card">
+                            <div class="card-body">
+                                <div class="stat-icon bg-warning">
+                                    <i class="bi bi-exclamation-triangle"></i>
+                                </div>
+                                <h5 class="card-title">Low Stock</h5>
+                                <h2 class="stat-value" id="low-stock-items">0</h2>
+                                <p class="stat-change"><a href="#" id="view-low-stock">View items</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card stat-card">
+                            <div class="card-body">
+                                <div class="stat-icon bg-success">
+                                    <i class="bi bi-currency-dollar"></i>
+                                </div>
+                                <h5 class="card-title">Today's Sales</h5>
+                                <h2 class="stat-value" id="today-sales">0</h2>
+                                <p class="stat-change"><span class="text-success">+15%</span> from yesterday</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card stat-card">
+                            <div class="card-body">
+                                <div class="stat-icon bg-info">
+                                    <i class="bi bi-clock-history"></i>
+                                </div>
+                                <h5 class="card-title">Pending Payments</h5>
+                                <h2 class="stat-value" id="pending-payments">0</h2>
+                                <p class="stat-change"><a href="#" id="view-pending-payments">View details</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Row -->
+                <div class="row charts-row">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Monthly Sales</h5>
+                                <div class="chart-actions">
+                                    <select class="form-select form-select-sm" id="sales-period">
+                                        <option value="30">Last 30 Days</option>
+                                        <option value="90">Last 90 Days</option>
+                                        <option value="365">Last Year</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="salesChart" height="300"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Sales by Category</h5>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="categoryChart" height="300"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity Row -->
+                <div class="row activity-row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Recent Sales</h5>
+                                <a href="#" class="btn btn-sm btn-outline-primary">View All</a>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Invoice #</th>
+                                                <th>Customer</th>
+                                                <th>Amount</th>
+                                                <th>Date</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="recent-sales">
+                                            <!-- Filled by JavaScript -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Low Stock Items</h5>
+                                <a href="#" class="btn btn-sm btn-outline-warning">View All</a>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Part Code</th>
+                                                <th>Name</th>
+                                                <th>Stock</th>
+                                                <th>Reorder Level</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="low-stock-list">
+                                            <!-- Filled by JavaScript -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Notification Modal -->
+    <div class="modal fade" id="notificationModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Notifications</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="notification-list">
+                    <!-- Notifications will be added here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./js/renderer.js"></script>
+    <script src="./js/dashboard.js"></script>
+</body>
+</html>

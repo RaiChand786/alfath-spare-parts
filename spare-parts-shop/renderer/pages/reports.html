@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alfath Spare Parts - Reports</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="/renderer/css/style.css" rel="stylesheet">
+    <link href="/renderer/css/reports.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar (same as dashboard) -->
+        <nav class="sidebar">
+            <!-- Sidebar content from dashboard -->
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <div class="top-bar">
+                <div class="toggle-sidebar">
+                    <i class="bi bi-list"></i>
+                </div>
+                <div class="page-title">
+                    <h3>Reports</h3>
+                </div>
+                <div class="top-bar-actions">
+                    <button class="btn btn-sm btn-outline-secondary" id="print-report-btn">
+                        <i class="bi bi-printer"></i> Print
+                    </button>
+                    <button class="btn btn-sm btn-outline-primary" id="export-excel-btn">
+                        <i class="bi bi-file-earmark-excel"></i> Excel
+                    </button>
+                    <button class="btn btn-sm btn-outline-danger" id="export-pdf-btn">
+                        <i class="bi bi-file-earmark-pdf"></i> PDF
+                    </button>
+                </div>
+            </div>
+
+            <!-- Reports Content -->
+            <div class="reports-content">
+                <!-- Report Selection -->
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label class="form-label">Report Type</label>
+                                <select class="form-select" id="report-type">
+                                    <option value="sales">Sales Report</option>
+                                    <option value="inventory">Inventory Report</option>
+                                    <option value="purchases">Purchases Report</option>
+                                    <option value="profit">Profit & Loss</option>
+                                    <option value="customer">Customer Sales</option>
+                                    <option value="supplier">Supplier Purchases</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Date Range</label>
+                                <div class="input-group">
+                                    <input type="date" class="form-control" id="date-from">
+                                    <span class="input-group-text">to</span>
+                                    <input type="date" class="form-control" id="date-to">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label">Group By</label>
+                                <select class="form-select" id="group-by">
+                                    <option value="day">Day</option>
+                                    <option value="week">Week</option>
+                                    <option value="month">Month</option>
+                                    <option value="year">Year</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2 d-flex align-items-end">
+                                <button class="btn btn-primary w-100" id="generate-report-btn">
+                                    <i class="bi bi-arrow-repeat"></i> Generate
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Report Filters (dynamic based on report type) -->
+                <div class="card mb-3" id="dynamic-filters">
+                    <!-- Filled by JavaScript -->
+                </div>
+
+                <!-- Report Summary Cards -->
+                <div class="row mb-3" id="report-summary">
+                    <!-- Filled by JavaScript -->
+                </div>
+
+                <!-- Report Charts -->
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h5 class="mb-0">Visual Summary</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="report-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Report Data Table -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Report Data</h5>
+                            <div class="dropdown">
+                                <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="export-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-download"></i> Export
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="export-dropdown">
+                                    <li><a class="dropdown-item" href="#" id="export-csv-btn">CSV</a></li>
+                                    <li><a class="dropdown-item" href="#" id="export-excel-table-btn">Excel</a></li>
+                                    <li><a class="dropdown-item" href="#" id="export-pdf-table-btn">PDF</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover" id="report-table">
+                                <thead>
+                                    <!-- Filled by JavaScript -->
+                                </thead>
+                                <tbody>
+                                    <!-- Filled by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/renderer/js/renderer.js"></script>
+    <script src="/renderer/js/reports.js"></script>
+</body>
+</html>
